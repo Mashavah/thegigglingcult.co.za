@@ -1,0 +1,9 @@
+The Giggling Cult — complete updated project
+
+This version includes the approved design changes and removes tgc-icon.png.
+The wordmark remains in public/brand/tgc-wordmark-text.png.
+
+For Join form email delivery in Vercel, configure:
+RESEND_API_KEY
+TGC_JOIN_TO_EMAIL
+TGC_JOIN_FROM_EMAIL
