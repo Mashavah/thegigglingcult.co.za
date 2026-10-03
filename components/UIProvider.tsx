@@ -11,7 +11,7 @@ import { fmt } from '@/lib/dates';
 import { TYPE_LABEL, bySlug, event as findEvent } from '@/lib/queries';
 import type { Event } from '@/lib/types';
 import { Icon } from './Icons';
-import { Avatar, ProvinceTag, RisingTag } from './ui';
+import { Avatar, ProvinceTag } from './ui';
 
 type Ctx = { openEvent: (id: string) => void; toast: (msg: string) => void; close: () => void };
 const UICtx = createContext<Ctx | null>(null);
@@ -94,7 +94,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
               <div className="lineup-list">
                 {ev.lineup.map((s) => { const c = bySlug[s]; return (
                   <Link key={s} className="lineup-item" href={`/comedians/${s}`}>
-                    <Avatar c={c} /><span className="name">{c.name}</span>{c.upcoming && <span style={{ marginLeft: 'auto' }}><RisingTag /></span>}
+                    <Avatar c={c} /><span className="name">{c.name}</span>
                   </Link>
                 ); })}
               </div>
