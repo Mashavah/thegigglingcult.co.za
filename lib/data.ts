@@ -484,8 +484,8 @@ export const NEWS: Article[] = [
     excerpt: "The 1,800-seat room went in under a day. A Sunday matinee has been added for the overflow.",
     body: "Popps Culture is now a two-show run at Teatro Montecasino. The Saturday night is gone; the added Sunday afternoon show goes on sale Friday at 09:00. Expect the same hour, slightly less shouting." },
   { slug: "open-mic-guide", date: day(-3), category: "Guide", readTime: 6,
-    title: "Where to get your first five minutes: every open mic in GP, WC and KZN",
-    excerpt: "We mapped every weekly open mic across the three provinces, including sign-up rules, slot lengths and who runs the door.",
+    title: "Where to get your first five minutes: open mics across GP, WC, KZN and EC",
+    excerpt: "We mapped weekly open mics across the four launch provinces, including sign-up rules, slot lengths and who runs the door.",
     body: "Getting stage time is the whole game for a new comic. We spoke to the people running each room about how to get booked, what not to do on your first night, and which mics are best for working new material versus building tape. Bookmark this — we update it monthly." },
   { slug: "jou-ma-se-renovation", date: day(-5), category: "Venues", readTime: 2,
     title: "Jou Ma Se Comedy Club reopens with a bigger room and a proper green room",
@@ -498,11 +498,11 @@ export const NEWS: Article[] = [
   { slug: "goliath-tuesday-format", date: day(-9), category: "Venues", readTime: 3,
     title: "Goliath Comedy Club changes its Tuesday format to a four-act showcase",
     excerpt: "The Melrose Arch room is trading the long line-up for tighter, longer sets: four comics, fifteen minutes each.",
-    body: "Goliath says the change is about giving mid-career comics room to stretch. The Tuesday ticket stays at R120 and the bill will always include at least one comic from the Rising list." },
+    body: "Goliath says the change is about giving mid-career comics room to stretch. The Tuesday ticket stays at R120 and the bill will always include at least one emerging comic." },
   { slug: "giggling-cult-launch", date: day(-14), category: "Announcements", readTime: 2,
     title: "Welcome to The Giggling Cult",
-    excerpt: "One place for every stand-up show in South Africa. Starting with Gauteng, the Western Cape and KwaZulu-Natal.",
-    body: "We built this because finding a comedy show in South Africa meant checking six Instagram accounts and a WhatsApp group. Now it's one calendar. Comedians: join to claim your profile and list your shows. Audiences: join for the weekly line-up straight to your inbox. More provinces are coming as soon as we can cover them properly." },
+    excerpt: "One place for South African stand-up comedy. Launching across Gauteng, the Western Cape, KwaZulu-Natal and the Eastern Cape.",
+    body: "We built this because finding a comedy show in South Africa meant checking six Instagram accounts and a WhatsApp group. Now it's one place to discover the scene. Launch coverage starts with Gauteng, the Western Cape, KwaZulu-Natal and the Eastern Cape. Comedians can submit profile details, audiences can join for updates, and venues can put their comedy nights on the map. More provinces are coming as soon as we can cover them properly." },
 ];
 
 /* Editorial blurb for the week; the numbers are computed live */

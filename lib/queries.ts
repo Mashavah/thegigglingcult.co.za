@@ -9,6 +9,11 @@ export const article = (slug: string) => NEWS.find((n) => n.slug === slug);
 
 export const eventProvince = (e: Event): ProvinceId => VENUES[e.venue].province;
 
+/* Launch coverage: the four provinces listed publicly at launch. Other provinces stay in the data. */
+export const LAUNCH_PROVINCES: ProvinceId[] = ['gp', 'wc', 'kzn', 'ec'];
+export const isLaunchProvince = (v: string | null | undefined): v is ProvinceId => !!v && LAUNCH_PROVINCES.includes(v as ProvinceId);
+export const isLaunchEvent = (e: Event) => LAUNCH_PROVINCES.includes(eventProvince(e));
+
 export const sameDay = (a: Date, b: Date) =>
   a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
 

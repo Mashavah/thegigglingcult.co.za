@@ -3,11 +3,11 @@
 Come for the giggles. Stay for the cult.
 
 A platform for South African stand-up comedy: one calendar for every show, a directory of every
-comedian, and the week in comedy — across all nine provinces.
+comedian, and the week in comedy — starting with four launch provinces (Gauteng, Western Cape, KwaZulu-Natal, Eastern Cape).
 
 **Features**
 - Interactive events calendar with list and by-comedian views, filterable by province, URL-shareable
-- A–Z comedian directory with bios, social links, upcoming shows and a "Rising" list for new talent
+- A–Z comedian directory with bios, social links, upcoming shows (a "Rising stars" spotlight is marked coming soon)
 - Individual comedian and article pages
 - Weekly summary with live stats, latest news, and comedian/audience newsletter sign-up
 - Next.js App Router + TypeScript; persistent layout so navigation never reloads the page
@@ -31,7 +31,7 @@ app/
   template.tsx            per-navigation page transition
   page.tsx                home
   events/page.tsx         calendar / list / by-comedian (?view= &province= &comedian=)
-  comedians/page.tsx      A–Z (?letter= &province= &rising=1)
+  comedians/page.tsx      A–Z (?letter=)
   comedians/[slug]/       comedian profile
   news/page.tsx           listing
   news/[slug]/            article
@@ -58,3 +58,21 @@ public/img/               photography + comedian photos (see public/img/comedian
 - Replace `day(n)` relative dates with real dates or an API; then drop `force-dynamic` and let pages prerender.
 - Wire `JoinForm.tsx` to a real newsletter/CRM endpoint (currently localStorage).
 - Add ticketing links (Quicket / Webtickets / Computicket) to events.
+
+## Join form email delivery
+
+Audience, comedian and venue submissions are POSTed to `app/api/join/route.ts`, which emails the team through [Resend](https://resend.com).
+Copy `.env.example` to `.env.local` (and add the same variables in Vercel):
+
+```
+RESEND_API_KEY=
+TGC_JOIN_TO_EMAIL=
+TGC_JOIN_FROM_EMAIL=
+```
+
+Without them the form shows a friendly error and the API returns 503.
+
+## Launch provinces
+
+Public listings (calendar, list, by-comedian, home, footer) are limited to `LAUNCH_PROVINCES` in `lib/queries.ts`
+(`gp`, `wc`, `kzn`, `ec`). Add an id there to unlock another province.

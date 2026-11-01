@@ -1,17 +1,39 @@
 'use client';
 
-/* Nav + footer. Mounted once in the root layout; they never re-render on navigation. */
+/* Global navigation and footer. */
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { PROVINCES } from '@/lib/data';
+import type { ProvinceId } from '@/lib/types';
 import { Icon } from './Icons';
 import { Wordmark } from './Wordmark';
 
 const LINKS = [
-  ['/', 'Home'], ['/events', 'Events'], ['/comedians', 'Comedians'], ['/news', 'News'],
+  ['/', 'Home'],
+  ['/events', 'Events'],
+  ['/comedians', 'Comedians'],
+  ['/news', 'News'],
 ] as const;
+
+const LAUNCH_PROVINCES: ProvinceId[] = ['gp', 'wc', 'kzn', 'ec'];
+
+function BrandLockup({ priority = false }: { priority?: boolean }) {
+  return (
+    <span className="brand-lockup" aria-hidden="true">
+      <Image
+        className="brand-lockup-text"
+        src="/brand/tgc-wordmark-text.png"
+        alt=""
+        width={145}
+        height={70}
+        priority={priority}
+      />
+    </span>
+  );
+}
 
 export function Nav() {
   const pathname = usePathname();
@@ -24,20 +46,46 @@ export function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-  useEffect(() => { setOpen(false); }, [pathname]);
 
-  const current = (href: string) => (href === '/' ? pathname === '/' : pathname.startsWith(href));
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  const current = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
     <header className="nav" data-scrolled={scrolled}>
       <div className="container nav-inner">
-        <Link className="brand" href="/"><Icon.logo className="brand-mark" /><span>The Giggling Cult</span></Link>
-        <button className="nav-toggle icon-btn" aria-label="Menu" aria-expanded={open} aria-controls="nav-links" onClick={() => setOpen((o) => !o)}><Icon.menu /></button>
+        <Link className="brand brand-wordmark" href="/" aria-label="The Giggling Cult home">
+          <BrandLockup priority />
+        </Link>
+
+        <button
+          className="nav-toggle icon-btn"
+          aria-label="Menu"
+          aria-expanded={open}
+          aria-controls="nav-links"
+          onClick={() => setOpen((o) => !o)}
+        >
+          <Icon.menu />
+        </button>
+
         <nav className="nav-links" id="nav-links" data-open={open}>
           {LINKS.map(([href, label]) => (
-            <Link key={href} className="nav-link" href={href} aria-current={current(href) ? 'page' : undefined}>{label}</Link>
+            <Link
+              key={href}
+              className="nav-link"
+              href={href}
+              aria-current={current(href) ? 'page' : undefined}
+            >
+              {label}
+            </Link>
           ))}
-          <Link className="btn btn-primary btn-sm nav-cta" href="/join">Join the Cult</Link>
+
+          <Link className="btn btn-primary btn-sm nav-cta" href="/join">
+            Join the Cult
+          </Link>
         </nav>
       </div>
     </header>
@@ -49,16 +97,62 @@ export function Footer() {
     <footer className="footer">
       <div className="container">
         <Wordmark />
+
         <div className="footer-inner">
           <div>
-            <Link className="brand" href="/"><Icon.logo className="brand-mark" /><span>The Giggling Cult</span></Link>
-            <p>Every stand-up show in Mzansi, one calendar. All nine provinces, from the Cape to the Lowveld. No town too small.</p>
+            <Link
+              className="brand brand-wordmark footer-brand"
+              href="/"
+              aria-label="The Giggling Cult home"
+            >
+              <BrandLockup />
+            </Link>
+
+            <p>
+              SA&apos;s home of stand-up comedy. Discover shows, meet comedians
+              and follow the culture across our four launch provinces.
+            </p>
+
+            <p className="small muted">
+              Starting where the scene is loudest — more provinces unlocking soon.
+            </p>
           </div>
-          <div><h4>Wander</h4><ul><li><Link href="/events">The calendar</Link></li><li><Link href="/comedians">The congregation</Link></li><li><Link href="/news">The goss</Link></li></ul></div>
-          <div><h4>Territories</h4><ul>{Object.values(PROVINCES).map((p) => <li key={p.id}><Link href={`/events?province=${p.id}`}>{p.name}</Link></li>)}</ul></div>
-          <div><h4>Enlist</h4><ul><li><Link href="/join?as=comedian">I&apos;m funny (allegedly)</Link></li><li><Link href="/join?as=audience">I just want to laugh</Link></li><li><a href="mailto:hello@thegigglingcult.co.za">Talk to a human</a></li></ul></div>
+
+          <div>
+            <h4>Explore</h4>
+            <ul>
+              <li><Link href="/events">Events calendar</Link></li>
+              <li><Link href="/comedians">Comedians A–Z</Link></li>
+              <li><Link href="/news">Comedy news</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4>Launch Provinces</h4>
+            <ul>
+              {LAUNCH_PROVINCES.map((id) => (
+                <li key={id}>
+                  <Link href={`/events?province=${id}`}>{PROVINCES[id].name}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4>Join the Cult</h4>
+            <ul>
+              <li><Link href="/join?as=audience">Join as an audience member</Link></li>
+              <li><Link href="/join?as=comedian">Join as a comedian</Link></li>
+              <li><Link href="/join?as=venue">Join as a venue</Link></li>
+              <li><a href="mailto:hello@thegigglingcult.co.za">Talk to a human</a></li>
+            </ul>
+          </div>
         </div>
-        <div className="footer-bottom"><span>© {new Date().getFullYear()} The Giggling Cult · Made in South Africa</span><span>Powered by Mirai Stack</span></div>
+
+        <div className="footer-bottom">
+          <span>© {new Date().getFullYear()} The Giggling Cult · Made in South Africa</span>
+          <span>Powered by Mirai Stack</span>
+        </div>
       </div>
     </footer>
   );

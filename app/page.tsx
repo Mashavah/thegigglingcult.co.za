@@ -5,10 +5,15 @@ import { ComedianCard, EventCard, NewsCard } from '@/components/Cards';
 import { Icon } from '@/components/Icons';
 import { COMEDIANS, NEWS, VENUES } from '@/lib/data';
 import { fmt } from '@/lib/dates';
-import { upcomingEvents } from '@/lib/queries';
+import { eventProvince, upcomingEvents } from '@/lib/queries';
+import type { ProvinceId } from '@/lib/types';
+
+const LAUNCH_PROVINCES: ProvinceId[] = ['gp', 'wc', 'kzn', 'ec'];
 
 export default function Home() {
-  const upcoming = upcomingEvents();
+  const upcoming = upcomingEvents().filter((event) =>
+    LAUNCH_PROVINCES.includes(eventProvince(event)),
+  );
   const ticker = upcoming.slice(0, 12);
   const featuredComedians = COMEDIANS.slice(0, 4);
 

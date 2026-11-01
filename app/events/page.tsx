@@ -5,7 +5,7 @@ import { PageMedia } from '@/components/PageMedia';
 
 export const metadata: Metadata = {
   title: 'Events',
-  description: 'Interactive calendar of every stand-up comedy show in South Africa, across all nine provinces. Browse by date, list or comedian.',
+  description: 'Interactive calendar of stand-up comedy shows across our launch provinces: Gauteng, Western Cape, KwaZulu-Natal and Eastern Cape. Browse by date, list or comedian.',
 };
 
 export default function EventsPage() {
