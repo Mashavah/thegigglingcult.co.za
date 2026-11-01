@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Anton, Inter, Montserrat } from 'next/font/google';
 import { Footer, Nav } from '@/components/Chrome';
 import { UIProvider } from '@/components/UIProvider';
@@ -33,9 +33,6 @@ export const metadata: Metadata = {
   },
   description:
     'Discover South African stand-up comedy, upcoming shows, comedians and comedy news. Launching across Gauteng, Western Cape, KwaZulu-Natal and Eastern Cape.',
-  icons: {
-    icon: '/favicon.svg',
-  },
   openGraph: {
     type: 'website',
     locale: 'en_ZA',
@@ -51,6 +48,10 @@ export const metadata: Metadata = {
     description:
       'Discover shows, meet comedians and follow South African comedy culture.',
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#111111',
 };
 
 // Demo data is generated relative to "today", so render per request rather than at build time.

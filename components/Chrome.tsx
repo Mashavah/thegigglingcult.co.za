@@ -9,7 +9,6 @@ import { useEffect, useState } from 'react';
 import { PROVINCES } from '@/lib/data';
 import type { ProvinceId } from '@/lib/types';
 import { Icon } from './Icons';
-import { Wordmark } from './Wordmark';
 
 const LINKS = [
   ['/', 'Home'],
@@ -20,18 +19,24 @@ const LINKS = [
 
 const LAUNCH_PROVINCES: ProvinceId[] = ['gp', 'wc', 'kzn', 'ec'];
 
-function BrandLockup({ priority = false }: { priority?: boolean }) {
-  return (
-    <span className="brand-lockup" aria-hidden="true">
-      <Image
-        className="brand-lockup-text"
-        src="/brand/tgc-wordmark-text.png"
-        alt=""
-        width={145}
-        height={70}
-        priority={priority}
-      />
-    </span>
+function BrandLockup({ priority = false, stacked = false }: { priority?: boolean; stacked?: boolean }) {
+  return stacked ? (
+    <Image
+      className="brand-logo brand-logo-stacked"
+      src="/brand/tgc-logo-stacked.png"
+      alt="The Giggling Cult"
+      width={168}
+      height={183}
+    />
+  ) : (
+    <Image
+      className="brand-logo brand-logo-horizontal"
+      src="/brand/tgc-logo-horizontal.png"
+      alt="The Giggling Cult"
+      width={286}
+      height={104}
+      priority={priority}
+    />
   );
 }
 
@@ -96,8 +101,6 @@ export function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <Wordmark />
-
         <div className="footer-inner">
           <div>
             <Link
@@ -105,7 +108,7 @@ export function Footer() {
               href="/"
               aria-label="The Giggling Cult home"
             >
-              <BrandLockup />
+              <BrandLockup stacked />
             </Link>
 
             <p>

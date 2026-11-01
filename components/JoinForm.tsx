@@ -4,6 +4,7 @@
    Submissions are POSTed to /api/join, which emails the TGC team via Resend. */
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { PROVINCES } from '@/lib/data';
@@ -137,7 +138,7 @@ export function JoinForm() {
       <div className="join-form enter" style={{ '--i': 5 } as React.CSSProperties}>
         {phase === 'done' ? (
           <div className="form-success" data-active="true">
-            <span className="check-mark"><Icon.check /></span>
+            <Image className="brand-tile" src="/brand/tgc-tile-gold.png" alt="" width={96} height={96} />
             <h3>{role === 'venue' ? `Thanks, ${name}.` : role === 'comedian' ? `Submission received, ${name}.` : `You're in, ${name}.`}</h3>
             <p className="muted">{role === 'comedian'
               ? 'The team will review the information and contact you if anything needs to be confirmed.'
